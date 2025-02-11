@@ -1,0 +1,24 @@
+# Use the default Docker image provided by Atlassian.
+image: atlassian/default-image:latest
+
+pipelines:
+  default:
+    - step:
+        name: "Sync to GitHub"
+        script:
+          # Display current branch (optional debugging)
+          - echo "Running on branch $(git rev-parse --abbrev-ref HEAD)"
+          
+          # Configure Git with a user (necessary for some git operations)
+          - git config --global user.email "you@example.com"
+          - git config --global user.name "Your Name"
+          
+          # Add GitHub as a new remote using environment variables for authentication.
+          # The URL is of the form: https://<username>:<token>@github.com/<username>/<repo>.git
+          - git remote add github https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/$GITHUB_USERNAME/$GITHUB_REPO.git || true
+          
+          # Push all branches to the GitHub remote.
+          - git push github --all
+          
+          # Optionally, push all tags as well.
+          - git push github --tags
