@@ -10,8 +10,8 @@ pipelines:
           - echo "Running on branch $(git rev-parse --abbrev-ref HEAD)"
           
           # Configure Git with a user (necessary for some git operations)
-          - git config --global user.email "you@example.com"
-          - git config --global user.name "Your Name"
+          - git config --global user.email "foryoungjuniorngu@gmail.com"
+          - git config --global user.name "JuniorDCoder"
           
           # Add GitHub as a new remote using environment variables for authentication.
           # The URL is of the form: https://<username>:<token>@github.com/<username>/<repo>.git
